@@ -87,7 +87,7 @@ ghci
 
 In GHCi, load the file..
 
-```c
+```bas
 Prelude> :load myprogram.hs
 ```
 
@@ -95,24 +95,91 @@ Now you can type a function name or any expression defined in the file.
 
 Let's call the `add` function with 3 and 4..
 
-```c
+```bash
 *Main> add 3 4
 ```
 
 Let's execute the `result` variable..
 
-```c
+```bash
 *Main> result
 ```
 
 Let's execute the `main` function..
 
-```c
+```bash
 *Main> main
 ```
 
 
 
+### JavaScript and Haskell rounding
+
+#### JavaScript
+
+All numbers in JavaScript are stored as floating point numbers in memory
+
+That is, every number is converted to scientific notation like.. 1.2345 * 10^25
+
+And stored using up to 64 bits of binary memory for each number.. 
+
+- One bit for the sign (+ or -)
+- 11 bits for the exponent
+- 52 bits for the fraction (1.2345)
+
+This is because computer memory is limited, so computers cannot store numbers with infinite precision
+
+so to store 1/10 which to humans is simply 0.1 (decimal number system)
+
+a computer actually stores this as 0.0001100110011--repeated (binary number system)
+
+So the question was how many digits should be used to store this number in memory?
+
+And again that answer is 64 bits as detailed above
+
+and so just like when humans add 1/3 + 1/3 + 1/3 but without using fractions so..
+
+0.3333 + 0.3333 + 0.3333 = 0.9999
+
+when a computer adds something like 0.1 + 0.2 we may get something like 0.30000000000000004
 
 
-ok
+
+this shows up in rounding as well..
+
+```javascript
+Math.round(0.145 * 100) / 100; // returns 0.14
+```
+
+because `0.14` is actually stored as `0.14499999999999998` in memory.
+
+One elegant solution to this in JavaScript is..
+
+```javascript
+Number(Math.round(0.145 + 'e2') + 'e-2') // 0.15 Yay!
+```
+
+
+
+#### Haskell
+
+Though Haskell stores numbers in memory in a slightly different way, it is still subject to the same errors..
+
+```haskell
+fromIntegral (round (0.145 * 100)) / 100 -- returns 0.14
+```
+
+Here is a solution, comparable to our vanilla JS solution above..
+
+```haskell
+???
+```
+
+
+
+Note for both JavaScript and Haskell there are librabries/modules for dealing with floating point numbers :)
+
+
+
+
+
