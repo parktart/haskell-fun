@@ -17,13 +17,4 @@
 -- main = print (roundToTwoDecimalPlaces 0.145)
 
 
-import Data.Number.CReal
-
-roundToTwoDecimalPlaces :: Double -> Double
-roundToTwoDecimalPlaces x = fromRational (toRational (roundTo 2 (toRational x)))
-
-main :: IO ()
-main = print (roundToTwoDecimalPlaces 0.145)
-
-main :: IO ()
-main = print (roundToTwoDecimalPlaces 0.145)
+-- ??
